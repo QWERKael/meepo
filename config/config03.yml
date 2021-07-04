@@ -1,0 +1,5 @@
+host: 127.0.0.1
+listen: 4003
+name: server
+log path: ""
+plugin dir: "plugin"

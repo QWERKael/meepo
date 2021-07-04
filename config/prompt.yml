@@ -1,0 +1,70 @@
+#"change-to 10.10.201.51:8881": "连接到测试服务器"
+#"upload /Data/Go/src/atk_D_class/serv_linux -update": "升级客户端"
+#"upload -plugin /Data/Go/src/atk_D_class/plugin/": "上传插件模块"
+#"show net": "查看网络状态"
+#"show processlist --sortby=mem --limit=10": "查看进程状态"
+#"show load": "查看负载状态"
+#"sentry run": "发送心跳"
+#"mysql connect --password=122414 --host='172.16.158.128' --database='test'": "测试mysql连接"
+#"mysql q ": "查询mysql"
+#"mysql q \"SELECT * FROM information_schema.PROCESSLIST WHERE COMMAND <> 'Sleep' ORDER BY TIME DESC;\"": "测试mysql查询"
+#"async run": "启动异步任务管理器"
+#"async state": "查看异步任务管理器状态"
+#"async get ": "查看指定异步任务结果"
+#"transfer run": "启动文件接收器"
+#"transfer": "文件传输命令"
+
+#prompt:
+type: "Root"
+text: "root"
+desc: "根"
+yess:
+  show:
+    type: "Plugin"
+    desc: "展示"
+    yess:
+      net:
+        type: "Cmd"
+        desc: "查看网络"
+      load:
+        type: "Cmd"
+        desc: "查看负载"
+      processlist:
+        type: "Cmd"
+        desc: "查看进程"
+        yess:
+          "--sortby=":
+            type: "ArgKey"
+            desc: "排序"
+            yess:
+              cpu:
+                type: "ArgValue"
+                desc: "根据cpu使用情况排序"
+              mem:
+                type: "ArgValue"
+                desc: "根据内存使用情况排序"
+          "--limit=":
+            type: "ArgKey"
+            desc: "限制显示数量"
+      version:
+        type: "Version"
+        desc: "查看版本信息"
+  gossip:
+    type: "Plugin"
+    desc: "gossip集群相关操作"
+    yess:
+      run:
+        type: "Cmd"
+        desc: "启动gossip集群"
+      set:
+        type: "Cmd"
+        desc: "设置值"
+      get:
+        type: "Cmd"
+        desc: "获取值"
+      del:
+        type: "Cmd"
+        desc: "删除值"
+      cron:
+        type: "Cmd"
+        desc: "查看定时任务的详细信息"

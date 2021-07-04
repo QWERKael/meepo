@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package pb;
+
+import "github.com/AsynkronIT/protoactor-go/actor/protos.proto";
+//import "meepo/pb/actor/protos.proto";
+
+message Request {
+  string UUID = 1;
+  actor.PID Sender = 2;
+  MessageType MsgType = 3;
+  bytes ByteMsg = 4;
+
+  enum MessageType{
+    TEXT = 0;
+    MEEPO_TASK = 1;
+//    TransferState = 2;
+//    TransferData = 3;
+  }
+}
+
+message Response {
+  string UUID = 1;
+  StateCode State = 2;
+  bytes ByteMsg = 3;
+
+  enum StateCode {
+    SUCCESS = 0;
+    FAIL = 1;
+    UNKNOWN = 2;
+  }
+}
+
+message Transfer {
+  string FileUUID = 1;
+  actor.PID Sender = 2;
+  TransferState State = 3;
+  int64 Size = 4;
+  bytes Context = 5;
+
+  enum TransferState{
+    Unknown = 0;
+    Req = 1; // 发送者向接收者请求传输文件
+    OK = 2; // 接收者同意传输文件，或者接收者成功接收到文件块
+    Refuse = 3; // 接收者拒绝接收文件，可能是因为文件有重复
+    Fail = 4; // 接收者接收文件时出错
+    Data = 5; // 发送者传输文件块
+    Done = 6; // 发送者发送完成，传输最后一个文件块
+    Close = 7; // 发送者无法发送文件块
+  }
+}

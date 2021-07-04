@@ -1,0 +1,7 @@
+host: 127.0.0.1
+listen: 4001
+name: server
+work dir: "./"
+log path: ""
+plugin dir: "plugin"
+prompt config: "plugin"
