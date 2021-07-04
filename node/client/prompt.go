@@ -348,9 +348,13 @@ func parserTask(fields []string) (*tasks.MeepoTask, error) {
 		command    string
 		keyBuf     = ""
 		valBuf     = make([]string, 0)
-		args       = &tasks.Args{}
-		cmdFields  []string
-		argFields  []string
+		args       = &tasks.Args{
+			SubCommands: []string{},
+			Flags:       []string{},
+			KVs:         make(map[string][]string, 0),
+		}
+		cmdFields []string
+		argFields []string
 	)
 
 	//分离前面的pluginName、command、subCmd和后面的args
